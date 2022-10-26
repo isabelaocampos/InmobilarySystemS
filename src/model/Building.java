@@ -1,19 +1,30 @@
 package model;
 
+import model.Apartment;
+
 public class Building{ 
     
     String buildingName;
     int amountOfApartments;
     String buildingAdress;
 
-    public Apartment[] apartmentsInBuilding;
+    public static int TOTAL_APARTMENTS_PER_BUILDING = 10;
 
-    public Building(String buildingName, int amountOfApartments, String buildingAdress){
+    private Apartment[] apartmentsInBuilding;
+    private Apartment apartment;
+    public Building(String buildingName, String buildingAdress){
         this.buildingName = buildingName;
-        this.amountOfApartments = amountOfApartments;
         this.buildingAdress = buildingAdress;
     }
     
+    public Apartment[] getApartments(){
+		return apartmentsInBuilding; 
+	}
+
+	public Apartment getApartment(){
+		return apartment; 
+	}
+
     public void setBuildingName(String buildingName){
         this.buildingName = buildingName;
     }
@@ -22,13 +33,6 @@ public class Building{
         return buildingName;
     }
 
-    public void setAmountOfApartments(int amountOfApartments){
-        this.amountOfApartments = amountOfApartments;
-    }
-
-    public int getAmountOfApartments(){
-        return amountOfApartments;
-    }
 
     public void setBuildingAdress(String buildingAdress){
         this.buildingAdress = buildingAdress;
@@ -37,4 +41,19 @@ public class Building{
     public String getBuildingAdress(){
         return buildingAdress;
     }
+
+    public String addApartmentInBuilding(Apartment apartment){
+
+		String msj = "Maximum capacity reached"; 
+		boolean isEmpty = false; 
+		for(int i = 0; i <TOTAL_APARTMENTS_PER_BUILDING && !isEmpty; i++){
+			if(apartmentsInBuilding[i] == null){
+				apartmentsInBuilding[i] = apartment; 
+				isEmpty = true; 
+				msj = "Apartment registered successfully"; 
+			}
+		}
+
+		return msj; 
+	}
 }

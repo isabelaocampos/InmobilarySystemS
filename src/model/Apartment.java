@@ -7,8 +7,9 @@ public class Apartment{
     public int amountOfBathroom;
     public boolean apartmentBalcony;
     public int monthlyApartmentRent;
+    
 
-    public Apartment(int apartmentId, int amountOfRooms, int amountOfBathroom, boolean apartmentBalcony, int monthlyApartmentRent){
+    public Apartment(String buildingName, int apartmentId, int amountOfRooms, int amountOfBathroom, boolean apartmentBalcony, int monthlyApartmentRent){
         this.apartmentId = apartmentId;
         this.amountOfRooms = amountOfRooms;
         this.amountOfBathroom = amountOfBathroom;

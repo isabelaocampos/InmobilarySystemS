@@ -50,7 +50,7 @@ public class Main{
 	}
 
     public void executeOption(int option){
-        String msj, buildingName, buildingAdress, ownerName, bankAccount, tenantName = "";
+        String msj, buildingName, buildingAdress, ownerName, bankName, tenantName = "";
         int ownerContactPhone, phoneType ,apartmentId, ownerId, amountOfRoomsInApartment, amountOfBathroomsInApartment, apartmentBalcony, monthlyApartmentRent = 0;
         int ownerAccount, tenantId, tenantContactPhone = 0;  
         boolean balcony = false;
@@ -161,7 +161,7 @@ public class Main{
             }
 
             System.out.println("Write the name of the bank that the user use: ");
-            bankAccount = reader.next();
+            bankName = reader.next();
             System.out.println("Write the name where the apartment is located: ");
             System.out.println("Write the name of the building where the apartment is: ");
             buildingName = reader.next();
@@ -174,8 +174,8 @@ public class Main{
 
             } 
 
-            msj = inmobiliarySystem.registerOwnerToApartment(ownerId,ownerName,ownerContactPhone,phoneType,buildingName,apartmentId,ownerAccount,bankAccount);
-			inmobiliarySystem.addOwner(ownerId, ownerName, ownerContactPhone, tenantContactPhone, buildingName, apartmentId, ownerAccount, tenantName);
+            msj = inmobiliarySystem.registerOwnerToApartment(ownerId,ownerName,ownerContactPhone, phoneType,ownerAccount, bankName,buildingName, apartmentId);
+			inmobiliarySystem.addOwner(ownerId,ownerName,ownerContactPhone, phoneType,ownerAccount, bankName,buildingName, apartmentId);
 				
 			System.out.println(msj);
 			
@@ -186,13 +186,21 @@ public class Main{
             System.out.println("You are now adding a tenant to an apartment: ");
             System.out.println("Write the id of the tentant: ");
             tenantId = validateIntegerOption();
-            //validacion
+            if(tenantId<0){
+                System.out.println("Write a valid option"); 
+                break;
+
+            }
 
             System.out.println("Write the name of the tenant: ");
             tenantName = reader.next();
             System.out.println("Write the contact phone of the tentant: ");
             tenantContactPhone = validateIntegerOption();
-            //validacion
+            if(tenantContactPhone<0){
+                System.out.println("Write a valid option"); 
+                break;
+
+            }
             System.out.println("Write the phone type of the tenant");
 
             System.out.println("1. Home \n" +
@@ -201,14 +209,30 @@ public class Main{
             "4. Family \n" + 
             "5. Other");
             phoneType = validateIntegerOption();
+            if(phoneType >5 || phoneType <=0){
+                System.out.println("this isnot a valid option\n");
+                break;
+            }
 
             System.out.println("Write the name of the building where the apartment is located");
             buildingName = reader.next();
             System.out.println("Write the apartment id");
             apartmentId = validateIntegerOption();
-            //validacion
+			if(apartmentId<0){
+				System.out.println("Write a valid option"); 
+				break;
+
+			}
 
             break;
+
+            case 0: 
+				System.out.println("Exit program.");
+				break; 
+
+			default: 
+				System.out.println("Invalid Option");
+				break; 
 
         }
     }

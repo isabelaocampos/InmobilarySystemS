@@ -56,16 +56,16 @@ public class InmobiliarySystem {
         return typeOfPhone;
     }
 
-    public void setTypePhone(int typeOfPhone){
-		if(typeOfPhone == 1 ){
+    public void setTypeOfPhone(int phoneType){
+		if(phoneType == 1 ){
 			this.typeOfPhone = TypeOfPhone.HOME;
-		} else if (typeOfPhone ==2){
+		} else if (phoneType ==2){
 			this.typeOfPhone = TypeOfPhone.OFFICE;
-		}else if(typeOfPhone ==3){
+		}else if(phoneType ==3){
 			this.typeOfPhone = TypeOfPhone.MOVIL;
-		}else if(typeOfPhone ==4){
+		}else if(phoneType ==4){
 			this.typeOfPhone = TypeOfPhone.FAMILY;
-		}else if(typeOfPhone ==5){
+		}else if(phoneType ==5){
 			this.typeOfPhone = TypeOfPhone.OTHER; 
 		}
 	}
@@ -109,11 +109,11 @@ public class InmobiliarySystem {
 		return msj; 
     }
 
-    public void addOwner(int ownerId, String ownerName, int ownerContactPhone,int bankAccount, String bankName, int typeOfPhone,String buildingName, int apartmentId ){
+    public void addOwner(int ownerId, String ownerName, int ownerContactPhone, int phoneType, int ownerAccount, String bankName, String buildingName, int apartmentId){
 		boolean isEmpty = false; 
-		setTypePhone(typeOfPhone); 
+		setTypeOfPhone(phoneType); 
 		TypeOfPhone phone = getTypeOfPhone(); 
-		Owner owner = new Owner(ownerId, ownerName, ownerContactPhone, bankAccount,bankName, typeOfPhone, apartmentId, buildingName);
+		Owner owner = new Owner(ownerId, ownerName, ownerContactPhone, ownerAccount, bankName, phone, apartmentId, buildingName);
 		for(int i = 0; i <TOTAL_OWNERS && !isEmpty; i++){
 			if(owners[i] == null){
 				// I add the owner to the first available array space 
@@ -124,11 +124,11 @@ public class InmobiliarySystem {
  
 	}
 
-    public String registerOwnerToApartment(int ownerId, String ownerName, int ownerContactPhone, int bankAccount, String bankName, int typeOfPhone, int apartmentId, String buildingName){
+    public String registerOwnerToApartment(int ownerId, String ownerName, int ownerContactPhone, int phoneType, int ownerAccount, String bankName, String buildingName, int apartmentId){
 		String msj = ""; 
-		setTypePhone(typeOfPhone); 
+		setTypeOfPhone(phoneType); 
 		TypeOfPhone phone = getTypeOfPhone(); 
-		Owner newOwner = new Owner(ownerId, ownerName, ownerContactPhone, bankAccount,bankName, typeOfPhone, apartmentId, buildingName); 
+		Owner newOwner = new Owner(ownerId, ownerName, ownerContactPhone, ownerAccount, bankName, phone, apartmentId, buildingName); 
 		int posBuilding = searchBuildingByName(buildingName); 
 		if(posBuilding != -1 ){
 			msj = buildings[posBuilding].addOwnerInBuilding(newOwner, apartmentId); 
@@ -137,6 +137,22 @@ public class InmobiliarySystem {
 		}
 		return msj; 
 	}
+
+    public String registerTenantToApartment(int tenantId, String tenantName, int tenantContactPhone, int phoneType, String buildingName, int apartmentId){
+		String msj = ""; 
+		setTypeOfPhone(phoneType); 
+		TypeOfPhone phone = getTypeOfPhone(); 
+		Tenant newTenant = new Tenant(tenantId, tenantName, tenantContactPhone, phone, buildingName, apartmentId); 
+		int posBuilding = searchBuildingByName(buildingName); 
+		if(posBuilding != -1 ){
+			msj = buildings[posBuilding].addTenantWithObject(newTenant, apartmentId); 
+		}else{
+			msj = "this building does not exist"; 
+		}
+		return msj; 
+	}
+
+
 
     //////////////////
 

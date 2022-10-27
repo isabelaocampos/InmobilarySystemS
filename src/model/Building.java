@@ -46,12 +46,12 @@ public class Building{
 		return msj; 
 	}
 
-    public String addOwnerInBuilding(Owner owner, int idApartment){
+    public String addOwnerInBuilding(Owner owner, int apartmentId){
 
 		String msj = "Maximum capacity reached in this Building."; 
 		boolean isEmpty = false; 
 		for(int i = 0; i <TOTAL_APARTMENTS_PER_BUILDING && !isEmpty; i++){
-			if(apartmentsInBuilding[i] != null && apartmentsInBuilding[i].getApartmentId() == idApartment){
+			if(apartmentsInBuilding[i] != null && apartmentsInBuilding[i].getApartmentId() == apartmentId){
 				// I add the apartment to the first available array space 
 				apartmentsInBuilding[i].setOwner(owner); 
 				isEmpty = true; 
@@ -63,4 +63,23 @@ public class Building{
 
 		return msj; 
 	}
+
+    public String addTenantWithObject(Tenant tenant, int apartmentId){
+
+        String msj = "Maximum capacity reached in this Building."; 
+        boolean isEmpty = false; 
+        for(int i = 0; i <TOTAL_APARTMENTS_PER_BUILDING && !isEmpty; i++){
+            if(apartmentsInBuilding[i] != null && apartmentsInBuilding[i].getApartmentId() == apartmentId){
+                // I add the apartment to the first available array space 
+                apartmentsInBuilding[i].setTenant(tenant); 
+                isEmpty = true; 
+                msj = "New owner registed"; 
+            } else{
+                msj = "this apartment does not exist"; 
+                }
+        }
+    
+            return msj; 
+        }
+    
 }

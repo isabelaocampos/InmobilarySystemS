@@ -2,14 +2,15 @@ package model;
 
 public abstract class Person {
 
-    private String id;
+    private int id;
     private String name;
-    private String contactNumber;
+    private int contactNumber;
     private TypeOfPhone typeOfPhone;
     private String buildingName;
     private int apartmentId;
 
-    public Person(String id, String name, String contactNumber, TypeOfPhone typeOfPhone, String buildingName, int apartmentId){
+    public Person(int id, String name, int contactNumber, TypeOfPhone typeOfPhone, String buildingName, int apartmentId){
+        
         this.id = id;
         this.name = name;
         this.contactNumber = contactNumber;
@@ -19,7 +20,7 @@ public abstract class Person {
 
     }
 
-    public String getid(){
+    public int getid(){
         return id;
     }
 
@@ -27,7 +28,7 @@ public abstract class Person {
         return name;
     }
 
-    public String getContactNumber(){
+    public int getContactNumber(){
         return contactNumber;
     }
 

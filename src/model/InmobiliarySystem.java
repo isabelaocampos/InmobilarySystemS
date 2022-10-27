@@ -109,6 +109,35 @@ public class InmobiliarySystem {
 		return msj; 
     }
 
+    public void addOwner(int ownerId, String ownerName, int ownerContactPhone,int bankAccount, String bankName, int typeOfPhone,String buildingName, int apartmentId ){
+		boolean isEmpty = false; 
+		setTypePhone(typeOfPhone); 
+		TypeOfPhone phone = getTypeOfPhone(); 
+		Owner owner = new Owner(ownerId, ownerName, ownerContactPhone, bankAccount,bankName, typeOfPhone, apartmentId, buildingName);
+		for(int i = 0; i <TOTAL_OWNERS && !isEmpty; i++){
+			if(owners[i] == null){
+				// I add the owner to the first available array space 
+				owners[i] = owner; 
+				isEmpty = true;  
+			}
+		}
+ 
+	}
+
+    public String registerOwnerToApartment(int ownerId, String ownerName, int ownerContactPhone, int bankAccount, String bankName, int typeOfPhone, int apartmentId, String buildingName){
+		String msj = ""; 
+		setTypePhone(typeOfPhone); 
+		TypeOfPhone phone = getTypeOfPhone(); 
+		Owner newOwner = new Owner(ownerId, ownerName, ownerContactPhone, bankAccount,bankName, typeOfPhone, apartmentId, buildingName); 
+		int posBuilding = searchBuildingByName(buildingName); 
+		if(posBuilding != -1 ){
+			msj = buildings[posBuilding].addOwnerInBuilding(newOwner, apartmentId); 
+		} else{
+			msj = "this building does not exist"; 
+		}
+		return msj; 
+	}
+
     //////////////////
 
     public int searchBuildingByName(String buildingName){

@@ -2,35 +2,17 @@ package model;
 
 public class Owner extends Person{
 
-    private String idNumber;
-    private String accountNumber;
+    private int accountNumber;
     private String bankName;
 
-    public Owner(String id, String name, String contactNumber, String idNumber,String accountNumber, String bankName){
-        super (id, name, contactNumber);
-        this.idNumber = idNumber;
+    public Owner(int ownerId, String name, int ownerContactPhone,int accountNumber, String bankName, int typeOfPhone, int apartmentId, String buildingName){
+        super (ownerId, name, ownerContactPhone, typeOfPhone, buildingName, apartmentId);
         this.accountNumber = accountNumber;
         this.bankName = bankName;
     }
     
-    public void setIdNumber(String idNumber){
-        this.idNumber = idNumber;
-    }
-
-    public String getidNumber(){
-        return idNumber;
-    }
-
-    public void setAccountNumber(String accountNumber){
-        this.accountNumber = accountNumber;
-    }
-
-    public String getAccountNumber(){
+    public int getAccountNumber(){
         return accountNumber;
-    }
-
-    public void setBankName(String bankName){
-        this.bankName = bankName;
     }
 
     public String getbankName(){

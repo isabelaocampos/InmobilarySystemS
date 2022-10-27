@@ -3,15 +3,16 @@ package model;
 import model.Apartment;
 
 public class Building{ 
-    
-    String buildingName;
-    int amountOfApartments;
-    String buildingAdress;
 
     public static int TOTAL_APARTMENTS_PER_BUILDING = 10;
+    
+    String buildingName;
+    String buildingAdress;
+
 
     private Apartment[] apartmentsInBuilding;
     private Apartment apartment;
+
     public Building(String buildingName, String buildingAdress){
         this.buildingName = buildingName;
         this.buildingAdress = buildingAdress;
@@ -25,22 +26,10 @@ public class Building{
 		return apartment; 
 	}
 
-    public void setBuildingName(String buildingName){
-        this.buildingName = buildingName;
-    }
-
     public String getBuildingName(){
         return buildingName;
     }
 
-
-    public void setBuildingAdress(String buildingAdress){
-        this.buildingAdress = buildingAdress;
-    }
-
-    public String getBuildingAdress(){
-        return buildingAdress;
-    }
 
     public String addApartmentInBuilding(Apartment apartment){
 
@@ -51,6 +40,24 @@ public class Building{
 				apartmentsInBuilding[i] = apartment; 
 				isEmpty = true; 
 				msj = "Apartment registered successfully"; 
+			}
+		}
+
+		return msj; 
+	}
+
+    public String addOwnerInBuilding(Owner owner, int idApartment){
+
+		String msj = "Maximum capacity reached in this Building."; 
+		boolean isEmpty = false; 
+		for(int i = 0; i <TOTAL_APARTMENTS_PER_BUILDING && !isEmpty; i++){
+			if(apartmentsInBuilding[i] != null && apartmentsInBuilding[i].getApartmentId() == idApartment){
+				// I add the apartment to the first available array space 
+				apartmentsInBuilding[i].setOwner(owner); 
+				isEmpty = true; 
+				msj = "New owner registed"; 
+			} else{
+				msj = "this apartment does not exist"; 
 			}
 		}
 

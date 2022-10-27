@@ -5,35 +5,39 @@ public abstract class Person {
     private String id;
     private String name;
     private String contactNumber;
+    private TypeOfPhone typeOfPhone;
+    private String buildingName;
+    private int apartmentId;
 
-    public Person(String id, String name, String contactNumber){
+    public Person(String id, String name, String contactNumber, TypeOfPhone typeOfPhone, String buildingName, int apartmentId){
         this.id = id;
         this.name = name;
         this.contactNumber = contactNumber;
+        this.typeOfPhone = typeOfPhone;
+        this.buildingName = buildingName;
+        this.apartmentId = apartmentId;
 
-    }
-
-    public void setId(String id){
-        this.id = id;
     }
 
     public String getid(){
         return id;
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
     public String getName(){
         return name;
-    }
-
-    public void setContactNumber(String contactNumber){
-        this.contactNumber = contactNumber;
     }
 
     public String getContactNumber(){
         return contactNumber;
     }
+
+    public TypeOfPhone getTypeOfPhone(){
+		return typeOfPhone; 
+	}
+	public String getBuildingName(){
+		return buildingName; 
+	}
+	public int getApartmentId(){
+		return apartmentId;
+	}
 }

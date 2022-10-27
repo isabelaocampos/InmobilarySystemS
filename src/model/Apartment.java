@@ -1,39 +1,42 @@
 package model;
 
+import model.Owner;
+import model.Tenant;
+
 public class Apartment{
 
-    public int apartmentId;
-    public int amountOfRooms;
-    public int amountOfBathroom;
-    public boolean apartmentBalcony;
-    public int monthlyApartmentRent;
+    private String buildingName;
+    private int apartmentId;
+    private int amountOfRooms;
+    private int amountOfBathroom;
+    private boolean apartmentBalcony;
+    private int monthlyApartmentRent;
+    private Owner owner;
+    private Tenant tenant;
     
 
     public Apartment(String buildingName, int apartmentId, int amountOfRooms, int amountOfBathroom, boolean apartmentBalcony, int monthlyApartmentRent){
+        
+        this.buildingName = buildingName;
         this.apartmentId = apartmentId;
         this.amountOfRooms = amountOfRooms;
         this.amountOfBathroom = amountOfBathroom;
         this.apartmentBalcony = apartmentBalcony;
         this.monthlyApartmentRent = monthlyApartmentRent;
     }
-    
-    public void setApartmentId(int apartmentId){
-        this.apartmentId = apartmentId;
+
+    public String getBuildingName(){
+        return buildingName;
     }
 
     public int getApartmentId(){
         return apartmentId;
     }
-    public void setAmountOfRooms(int amountOfRooms){
-        this.amountOfRooms = amountOfRooms;
-    }
 
     public int getAmountofRooms(){
         return amountOfRooms;
     }
-    public void setAmountOfBathroom(int amountOfBathroom){
-        this.amountOfBathroom = amountOfBathroom;
-    }
+
 
     public int getAmountOfBathroom(){
         return amountOfBathroom;
@@ -42,16 +45,23 @@ public class Apartment{
     public boolean getApartmentBalcony(){
         return apartmentBalcony;
     }
-    public void setApartmentBalcony(boolean apartmentBalcony){
-        this.apartmentBalcony = apartmentBalcony;
-    }
-
     
-    public void setMonthlyApartmentRent(int monthlyApartmentRent){
-        this.monthlyApartmentRent = monthlyApartmentRent;
-    }
-
+    public Owner getOwner(){
+		return owner;
+	} 
+	public Tenant getTenant(){
+		return tenant; 
+    } 
     public int getMonthlyApartmentRent(){
         return monthlyApartmentRent;
     }
+
+    public void setOwner(Owner owner){
+		this.owner = owner; 
+	}
+
+    public void setTenant(Tenant tenant){
+		this.tenant = tenant;
+	}
+
 }

@@ -1,5 +1,5 @@
 package model;
 
 public enum TypeOfId {
-    CC, TI, NIT, NIP,CE, OTHER
+    CC, NIT, NIP,CE, OTHER
 }

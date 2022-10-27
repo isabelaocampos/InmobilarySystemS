@@ -17,6 +17,7 @@ public class InmobiliarySystem {
 	private Apartment apartment;
 	private Person person; 
 	private TypeOfPhone typeOfPhone; 
+    private TypeOfId typeOfId;
 
 
     public InmobiliarySystem(){
@@ -56,6 +57,10 @@ public class InmobiliarySystem {
         return typeOfPhone;
     }
 
+    public TypeOfId getTypeOfId(){
+        return typeOfId;
+    }
+
     public void setTypeOfPhone(int phoneType){
 		if(phoneType == 1 ){
 			this.typeOfPhone = TypeOfPhone.HOME;
@@ -67,6 +72,20 @@ public class InmobiliarySystem {
 			this.typeOfPhone = TypeOfPhone.FAMILY;
 		}else if(phoneType ==5){
 			this.typeOfPhone = TypeOfPhone.OTHER; 
+		}
+	}
+
+    public void setTypeOfId(int idType){
+		if(idType == 1 ){
+			this.typeOfId = TypeOfId.CC;
+		} else if (idType ==2){
+			this.typeOfId = TypeOfId.NIT;
+		}else if(idType ==3){
+			this.typeOfId = TypeOfId.NIP;
+		}else if(idType ==4){
+			this.typeOfId = TypeOfId.CE;
+		}else if(idType ==5){
+			this.typeOfId = TypeOfId.OTHER; 
 		}
 	}
 
@@ -109,14 +128,15 @@ public class InmobiliarySystem {
 		return msj; 
     }
 
-    public void addOwner(int ownerId, String ownerName, int ownerContactPhone, int phoneType, int ownerAccount, String bankName, String buildingName, int apartmentId){
+    public void addOwner(int ownerId, String ownerName, int ownerContactPhone, int phoneType, int idType, int ownerAccount, String bankName, String buildingName, int apartmentId){
 		boolean isEmpty = false; 
 		setTypeOfPhone(phoneType); 
 		TypeOfPhone phone = getTypeOfPhone(); 
-		Owner owner = new Owner(ownerId, ownerName, ownerContactPhone, ownerAccount, bankName, phone, apartmentId, buildingName);
+        setTypeOfId(idType);
+        TypeOfId id = getTypeOfId();
+		Owner owner = new Owner(ownerId, ownerName, ownerContactPhone, ownerAccount, bankName, id , phone, apartmentId, buildingName);
 		for(int i = 0; i <TOTAL_OWNERS && !isEmpty; i++){
 			if(owners[i] == null){
-				// I add the owner to the first available array space 
 				owners[i] = owner; 
 				isEmpty = true;  
 			}
@@ -124,16 +144,18 @@ public class InmobiliarySystem {
  
 	}
 
-    public String registerOwnerToApartment(int ownerId, String ownerName, int ownerContactPhone, int phoneType, int ownerAccount, String bankName, String buildingName, int apartmentId){
+    public String registerOwnerToApartment(int ownerId, String ownerName, int ownerContactPhone, int phoneType, int idType, int ownerAccount, String bankName, String buildingName, int apartmentId){
 		String msj = ""; 
 		setTypeOfPhone(phoneType); 
 		TypeOfPhone phone = getTypeOfPhone(); 
-		Owner newOwner = new Owner(ownerId, ownerName, ownerContactPhone, ownerAccount, bankName, phone, apartmentId, buildingName); 
+        setTypeOfId(idType);
+        TypeOfId id = getTypeOfId();
+		Owner newOwner = new Owner(ownerId, ownerName, ownerContactPhone, ownerAccount, bankName, id, phone, apartmentId, buildingName); 
 		int posBuilding = searchBuildingByName(buildingName); 
 		if(posBuilding != -1 ){
 			msj = buildings[posBuilding].addOwnerInBuilding(newOwner, apartmentId); 
 		} else{
-			msj = "this building does not exist"; 
+			msj = "Sorry, we couldn't find this building. Try again"; 
 		}
 		return msj; 
 	}
@@ -147,7 +169,7 @@ public class InmobiliarySystem {
 		if(posBuilding != -1 ){
 			msj = buildings[posBuilding].addTenantWithObject(newTenant, apartmentId); 
 		}else{
-			msj = "this building does not exist"; 
+			msj = "Sorry, we couldn't find this building. Try again"; 
 		}
 		return msj; 
 	}
